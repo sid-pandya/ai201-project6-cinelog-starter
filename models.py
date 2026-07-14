@@ -84,6 +84,10 @@ class WatchlistEntry(db.Model):
 
     film = db.relationship("Film")
 
+    __table_args__ = (
+        db.UniqueConstraint("user_id", "film_id", name="unique_user_film_watchlist"),
+    )
+
     def to_dict(self):
         return {
             "id": self.id,
